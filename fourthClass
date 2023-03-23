@@ -1,0 +1,21 @@
+```rust
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+//枚举红黄绿灯
+trait Duration {
+    fn duration(&self) -> u32;
+}
+
+impl Duration for TrafficLight {
+    fn duration(&self) -> u32 {
+        match self {
+            TrafficLight::Red => 40,
+            TrafficLight::Yellow => 3,
+            TrafficLight::Green =>60,
+        }
+    }
+}
+```
