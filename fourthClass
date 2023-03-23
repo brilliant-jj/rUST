@@ -1,4 +1,4 @@
-```rust
+```1
 enum TrafficLight {
     Red,
     Yellow,
@@ -17,5 +17,79 @@ impl Duration for TrafficLight {
             TrafficLight::Green =>60,
         }
     }
+}/通过 Red.duration()、Yellow.duration() 和 Green.duration() 获取到对应交通信号灯的持续时间
+```
+```2
+fn sum_u32(numbers: &[u32]) -> Option<u32> {
+    let mut sum = 0u32;
+    for number in numbers {
+        // 检查加法是否会溢出
+        if let Some(new_sum) = sum.checked_add(*number) {
+            sum = new_sum;
+        } else {
+            // 溢出，返回 None
+            return None;
+        }
+    }
+    // 没有溢出，返回 Some(sum)
+    Some(sum)
+}
+```
+下面是一个使用 Rust 实现打印不同图形面积的泛型函数：
+
+```rust
+trait Shape {
+    fn get_area(&self) -> f64;
+}
+
+fn print_area<T: Shape>(shape: T) {
+    println!("The area of the shape is: {} unit squared.", shape.get_area());
+}
+```
+
+函数声明了一个 Shape trait 来约束传入的类型，该 trait 包含一个可以返回形状面积的 get_area方法。
+使用泛型 T 来表示该类型。
+然后使用 println! 宏来打印该形状的面积。
+下面是三个不同图形求面积的实现：
+```rust
+struct Circle {
+    radius: f64,
+}
+
+impl Shape for Circle {
+    fn get_area(&self) -> f64 {
+        self.radius.powi(2) * std::f64::consts::PI
+    }
+}
+
+struct Triangle {
+    base: f64,
+    height: f64,
+}
+
+impl Shape for Triangle {
+    fn get_area(&self) -> f64 {
+        self.base * self.height / 2.0
+    }
+}
+
+struct Square {
+    side: f64,
+}
+
+impl Shape for Square {
+    fn get_area(&self) -> f64 {
+        self.side.powi(2)
+    }
+}
+
+fn main() {
+    let circle = Circle { radius: 3.0 };
+    let triangle = Triangle { base: 4.0, height: 5.0 };
+    let square = Square { side: 2.0 };
+
+    print_area(circle);     // The area of the shape is: 28.274333882308138 unit squared.
+    print_area(triangle);   // The area of the shape is: 10 unit squared.
+    print_area(square);     // The area of the shape is: 4 unit squared.
 }
 ```
